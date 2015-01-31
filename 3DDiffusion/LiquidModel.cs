@@ -87,13 +87,12 @@ namespace Roadrunner._3DDiffusion
 
                                     float nearValue = GetState(stateCopy, (uint)iNew, (uint)jNew, (uint)kNew);
                                     float valueDiff = (nearValue - value);
-                                    float valueChange = valueDiff * (float)timeStep * consistency;
-                                    diffsToAverage.Add(valueChange);
+                                    diffsToAverage.Add(valueDiff);
                                 }
                             }
                         }
 
-                        float newValue = value + (diffsToAverage.Count > 0 ? diffsToAverage.Average() : 0.0f);
+                        float newValue = value + ((diffsToAverage.Count > 0 ? diffsToAverage.Average() : 0.0f) * (float)timeStep * consistency);
                         if (newValue < 0.0f || newValue > 1000.0f ||float.IsInfinity(newValue))
                         {
                             newValue = 0.0f;
