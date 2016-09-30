@@ -158,9 +158,9 @@ namespace Roadrunner._3DDiffusion
             return color;
         }
 
-        public static Matrix4 MatrixFromYawPitchRoll(float yaw, float pitch, float roll)
+        public static Matrix3 MatrixFromYawPitchRoll(float yaw, float pitch, float roll)
         {
-            return Matrix4.CreateFromQuaternion(QuaternionFromYawPitchRoll(yaw, pitch, roll));
+            return Matrix3.CreateFromQuaternion(QuaternionFromYawPitchRoll(yaw, pitch, roll));
         }
 
         public static Quaternion QuaternionFromYawPitchRoll(float yaw, float pitch, float roll)
@@ -321,7 +321,7 @@ namespace Roadrunner._3DDiffusion
 
                     GL.MatrixMode(MatrixMode.Modelview);
                     
-                    Matrix4 cameraMoveMatrix = MatrixFromYawPitchRoll(yaw, pitch, roll);
+                    Matrix3 cameraMoveMatrix = MatrixFromYawPitchRoll(yaw, pitch, roll);
                     Matrix4 lookAtMatrix = Matrix4.LookAt(Vector3.Transform(initialEyePosition, cameraMoveMatrix), lookAtPosition, upVector);
 
                     GL.Enable(EnableCap.CullFace);
